@@ -1,6 +1,5 @@
 package com.avinash.registration.service;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,8 +9,12 @@ import com.avinash.registration.repository.UserRepository;
 @Service("userService")
 public class UserService {
 
-	@Autowired
 	private UserRepository userRepository;
+
+	@Autowired
+	public UserService(UserRepository userRepository) {
+		this.userRepository = userRepository;
+	}
 
 	public User findByEmail(String email) {
 		return userRepository.findByEmail(email);
@@ -20,9 +23,9 @@ public class UserService {
 	public User findByConfirmationToken(String confirmationToken) {
 		return userRepository.findByConfirmationToken(confirmationToken);
 	}
-	
+
 	public void save(User user) {
 		userRepository.save(user);
-		
+
 	}
 }
